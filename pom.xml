@@ -2,16 +2,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.ienze.SimpleRegionMarket</groupId>
     <artifactId>SimpleRegionMarket</artifactId>
-    <version>3.6.1</version>
+    <version>3.6.2</version>
     <name>SimpleRegionMarket</name>
     <description>WorldGuard Region Market Plugin</description>
     <url>http://dev.bukkit.org/server-mods/simple-region-market</url>
     <properties>
         <state>release</state>
-        <majorversion>3.6.1</majorversion>
+        <majorversion>3.6.2</majorversion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.6.1</minecraft.version>
-        <minecraft_version>1_6_R1</minecraft_version>
+        <minecraft.version>1.6.2</minecraft.version>
+        <minecraft_version>1_6_R2</minecraft_version>
     </properties>
     <repositories>
         <repository>
@@ -62,7 +62,7 @@
         <dependency> <!-- NMS blocks -->
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.6.1-R0.1-SNAPSHOT</version>
+            <version>1.6.2-R0.1</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
