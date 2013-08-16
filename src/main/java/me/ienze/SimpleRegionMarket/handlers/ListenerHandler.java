@@ -3,10 +3,14 @@ package me.ienze.SimpleRegionMarket.handlers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import me.ienze.SimpleRegionMarket.SimpleRegionMarket;
 import me.ienze.SimpleRegionMarket.TokenManager;
 import me.ienze.SimpleRegionMarket.Utils;
 import me.ienze.SimpleRegionMarket.signs.TemplateMain;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -95,12 +99,15 @@ public class ListenerHandler implements Listener {
                             if (!signLocations.isEmpty()) {
                                 for (final Location signLoc : signLocations) {
                                     if (signLoc.equals(blockLocation)) {
-                                        //prevent for too much clicking
-                                        for (String key : lastPlayerClick.keySet()) {
-                                            if (lastPlayerClick.get(key) + signClickDifference < System.currentTimeMillis()) {
-                                                lastPlayerClick.remove(key);
-                                            }
-                                        }
+										//prevent for too much clicking
+										Iterator<Entry<String, Long>> iter = lastPlayerClick.entrySet().iterator();
+										while (iter.hasNext()) {
+											Entry<String, Long> ent = iter.next();
+											if (ent.getValue() + signClickDifference < System.currentTimeMillis()) {
+												iter.remove();
+											}
+										}
+
                                         if (!lastPlayerClick.containsKey(player.getName())) {
                                             lastPlayerClick.put(player.getName(), (long) 0);
                                         }
