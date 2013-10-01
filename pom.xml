@@ -10,8 +10,8 @@
         <state>release</state>
         <majorversion>3.6.2</majorversion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.6.2</minecraft.version>
-        <minecraft_version>1_6_R2</minecraft_version>
+        <minecraft.version>1.6.4</minecraft.version>
+        <minecraft_version>1_6_R3</minecraft_version>
     </properties>
     <repositories>
         <repository>
@@ -24,7 +24,7 @@
         </repository>
         <repository>
             <id>sk89q-mvn2</id>
-            <url>http://mvn2.sk89q.com/repo</url>
+            <url>https://github.com/sk89q/worldguard/</url>
         </repository>
         <repository>
             <id>sacredlabyrinth</id>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>5.7.4-SNAPSHOT</version>
+            <version>5.8.1-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>truezip</artifactId>
