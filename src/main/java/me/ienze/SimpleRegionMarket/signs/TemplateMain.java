@@ -17,13 +17,12 @@ import me.ienze.SimpleRegionMarket.handlers.LangHandler;
 import me.ienze.SimpleRegionMarket.regionTasks.TerrainRegeneratorThread;
 import me.ienze.SimpleRegionMarket.regions.RegionSaverData;
 import me.ienze.SimpleRegionMarket.regions.SimpleRegionData;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.material.Sign;
 
 /**
  * @author theZorro266
@@ -225,6 +224,35 @@ public abstract class TemplateMain {
         }
     }
 
+    /**
+     * if theres a dyable block attached to the region sign - change its color
+     * @param world
+     * @param region
+     * @param fromColor
+     * @param toColor
+     * @return true if successful, false if not
+     */
+    private boolean updateBlockColor(final String world, final String region, final DyeColor fromColor, final DyeColor toColor)
+    {
+        boolean success = false;
+
+        for (final Location sign : Utils.getSignLocations(this, world, region)) {
+            Sign s = (Sign) sign.getBlock().getState().getData();
+            Block attached = sign.getBlock().getRelative(s.getAttachedFace());
+
+            if(attached != null)
+            {
+                if(attached.getData() == fromColor.getWoolData())
+                {
+                    attached.setData(toColor.getWoolData());
+                    success = attached.getState().update(true);
+                }
+            }
+        }
+
+        return success;
+    }
+
     public void takeRegion(Player newOwner, String world, String region) {
         final ProtectedRegion protectedRegion = SimpleRegionMarket.wgManager.getProtectedRegion(Bukkit.getWorld(world), region);
 
@@ -260,6 +288,9 @@ public abstract class TemplateMain {
         list.add(region);
         LangHandler.NormalOut(newOwner, "PLAYER.REGION.BOUGHT", list);
 
+        //replace lime with red
+        updateBlockColor(world, region, DyeColor.LIME, DyeColor.RED);
+
         //teleport to it
         if (SimpleRegionMarket.configurationHandler.getBoolean("Teleport_To_Region")) {
             Utils.teleportToRegion(world, region, newOwner, false);
@@ -288,6 +319,9 @@ public abstract class TemplateMain {
         if (list.contains(this.id)) {
             SimpleRegionMarket.lwcManager.removeRegionProtection(protectedRegion, world);
         }
+
+        //replace red with lime
+        updateBlockColor(world, region, DyeColor.RED, DyeColor.LIME);
 
         tokenManager.updateSigns(this, world, region);
     }

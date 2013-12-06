@@ -3,7 +3,6 @@ package me.ienze.SimpleRegionMarket;
 import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import me.ienze.SimpleRegionMarket.handlers.CommandHandler;
 import me.ienze.SimpleRegionMarket.handlers.ConfigHandler;
@@ -71,13 +70,6 @@ public class SimpleRegionMarket extends JavaPlugin {
         permManager = new PermissionsManager();
 
         econManager = new EconomyManager(this);
-
-        try {
-            BukkitMetricsLite metrics = new BukkitMetricsLite(this);
-            metrics.start();
-        } catch (IOException e) {
-            // Failed to submit the stats :-(
-        }
 
         Utils.checkOldFilesToUpdate();
 
